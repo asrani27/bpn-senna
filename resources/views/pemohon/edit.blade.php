@@ -24,14 +24,14 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">NIK KTP</label>
               <div class="col-sm-10">
-              <input type="text" class="form-control" name="nik" required onkeypress="return hanyaAngka(event)" >
+              <input type="text" class="form-control" name="nik" value="{{$data->nik}}" required onkeypress="return hanyaAngka(event)" >
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-sm-2 control-label">Nama Lengkap</label>
               <div class="col-sm-10">
-              <input type="text" class="form-control" name="nama" required>
+              <input type="text" class="form-control" name="nama" value="{{$data->nama}}" required>
               </div>
             </div>
 
@@ -39,8 +39,13 @@
                     <label class="col-sm-2 control-label">Jenis Kelamin</label>
                     <div class="col-sm-10">
                       <select class="form-control select2" style="width: 100%;" name="jkel">
-                              <option value="L">Laki-laki</option>
+                        @if($data->jkel == 'L')
+                              <option value="L" selected>Laki-laki</option>
                               <option value="P">Peremuan</option>
+                        @else
+                              <option value="P" selected>Peremuan</option>
+                              <option value="L">Laki-laki</option>
+                        @endif
                       </select>
                     </div>
             </div>
@@ -52,7 +57,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-calendar"></i>
                         </div>
-                        <input type="text" class="form-control pull-right" name="tgl_lahir" id="datepicker" value="{{ Carbon\Carbon::today()->format('m/d/Y') }}">
+                        <input type="text" class="form-control pull-right" name="tgl_lahir" id="datepicker" value="{{ Carbon\Carbon::parse($data->tgl_lahir)->format('m/d/Y') }}">
                     </div>
                 </div>
             </div>
@@ -60,7 +65,7 @@
             <div class="form-group">
                     <label class="col-sm-2 control-label">Tempat Lahir</label>
                     <div class="col-sm-10">
-                    <input type="text" class="form-control" name="tempat_lahir" required>
+                    <input type="text" class="form-control" name="tempat_lahir" value="{{$data->tempat_lahir}}" required>
                     </div>
             </div>
 
@@ -69,7 +74,11 @@
               <div class="col-sm-10">
                 <select id="agama" class="form-control select2" style="width: 100%;" name="agama_id" required>
                     @foreach ($selectAga as $s)
-                      <option value="{{$s->id}}">{{$s->nama}}</option>
+                        @if($data->agama_id == $s->id)
+                            <option value="{{$s->id}}" selected>{{$s->nama}}</option>
+                        @else
+                            <option value="{{$s->id}}">{{$s->nama}}</option>
+                        @endif
                     @endforeach
                 </select>
               </div>
@@ -77,7 +86,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Alamat</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="alamat" required>
+                    <input type="text" class="form-control" name="alamat" value="{{$data->alamat}}" required>
                 </div>
             </div>
 
@@ -85,9 +94,12 @@
                     <label class="col-sm-2 control-label">Kecamatan</label>
                     <div class="col-sm-10">
                       <select id="kecamatan" class="form-control select2" style="width: 100%;" name="kecamatan_id" onchange="dataDesa()">
-                                <option value="" selected></option>    
                             @foreach ($selectKec as $s)
+                              @if($data->kecamatan_id == $s->id)
+                                <option value="{{$s->id}}" selected>{{$s->nama}}</option>
+                              @else
                                 <option value="{{$s->id}}">{{$s->nama}}</option>
+                              @endif
                             @endforeach
                       </select>
                     </div>
@@ -96,20 +108,26 @@
                     <label class="col-sm-2 control-label">Kelurahan/Desa</label>
                     <div class="col-sm-10">
                       <select id="kelurahan" class="form-control select2" style="width: 100%;" name="kelurahan_id" required>
-                           
+                          @foreach ($selectKel as $s)
+                          @if($data->kelurahan_id == $s->id)
+                            <option value="{{$s->id}}" selected>{{$s->nama}}</option>
+                          @else
+                            <option value="{{$s->id}}">{{$s->nama}}</option>
+                          @endif
+                        @endforeach
                       </select>
                     </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Pekerjaan</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="pekerjaan" required>
+                    <input type="text" class="form-control" name="pekerjaan" value="{{$data->pekerjaan}}" required>
                 </div>
             </div>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+            <button type="submit" class="btn btn-sm btn-primary">Update</button>
              <a href={{url('/pemohon')}} class="btn btn-sm btn-danger">Kembali</a>
           </div>
           <!-- /.box-footer -->
@@ -130,7 +148,7 @@ function dataDesa()
   var id = e.options[e.selectedIndex].value;
   $.ajax({
             type: 'GET',
-            url: 'dataDesa/' + id,
+            url: '{{url('dataDesa')}}'+id, 
             success: function (response) {
                   var obj = response;
                     $('#kelurahan').find('option').remove().end();

@@ -72,9 +72,18 @@ Route::get('/pemohon', 'PemohonController@index')->name('pemohon');
 Route::get('/pemohon/add', 'PemohonController@add')->name('addPemohon');
 Route::get('/pemohon/dataDesa/{id}', 'PemohonController@dataDesa');
 Route::post('/pemohon/save', 'PemohonController@store')->name('savePemohon');
-Route::post('/pemohon/update', 'PemohonController@update')->name('updatePemohon');
+Route::post('/pemohon/update/{id}', 'PemohonController@update')->name('updatePemohon');
 Route::get('/pemohon/delete/{id}', 'PemohonController@delete');
+Route::get('/pemohon/edit/{id}', 'PemohonController@edit');
+Route::post('/pemohon/akun/save', 'PemohonController@storeAkun')->name('saveAkunPemohon');
 
+//Route Berkas
+Route::get('/berkas', 'BerkasController@index')->name('berkas');
+Route::get('/berkas/add', 'BerkasController@add')->name('addBerkas');
+Route::post('/berkas/save', 'BerkasController@store')->name('saveBerkas');
+Route::post('/berkas/update', 'BerkasController@update')->name('updateBerkas');
+Route::get('/berkas/delete/{id}', 'BerkasController@delete');
+Route::get('/berkas/dataDesa/{id}', 'PemohonController@dataDesa');
 
 
 

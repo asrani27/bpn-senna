@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Agenda;
 use Carbon\Carbon;
 use Alert;
+use App\Berkas;
+use Mapper;
 
 class HomeController extends Controller
 {
@@ -26,7 +28,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        Mapper::map(-3.31985, 114.60206, ['zoom' => 14, 'marker' => false, 'gestureHandling' => 'greedy', 'scrollWheelZoom' => false]);
+        $berkas = Berkas::all();
+        foreach($berkas as $b)
+        {
+            Mapper::informationWindow($b->lat, $b->long, 
+            "Nomor : {$b->nomor} <br>
+            Nama : {$b->pemohon->nama} <br>
+            Luas : {$b->luas} <br>
+            Status : {$b->status} <br>
+            ", 
+            ['open' => false, 'maxWidth'=> 300, 'markers' => ['title' => 'Title', 'autoClose' => true]]);
+        }
+        
+        return view('home',compact('berkas'));
     }
 
     public function delete($id)

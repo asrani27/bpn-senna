@@ -14,4 +14,9 @@ class Kelurahan extends Model
     {
         return $this->belongsTo(Kecamatan::class);
     }
+
+    public function berkas()
+    {
+        return $this->hasMany(Berkas::class);
+    }
 }

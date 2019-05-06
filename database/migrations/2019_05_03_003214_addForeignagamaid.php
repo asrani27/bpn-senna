@@ -26,7 +26,7 @@ class AddForeignagamaid extends Migration
     public function down()
     {
         Schema::table('pemohon', function (Blueprint $table) {
-            $table->dropForeign('agama_id');
+            $table->dropForeign(['agama_id']);
         });
     }
 }

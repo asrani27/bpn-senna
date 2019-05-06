@@ -7,6 +7,8 @@ use App\Pemohon;
 use App\Kelurahan;
 use App\Kecamatan;
 use App\Agama;
+use App\User;
+use App\Role;
 use Auth;
 use Alert;
 use Carbon\Carbon;
@@ -64,30 +66,71 @@ class PemohonController extends Controller
 
     public function edit($id)
     {
-        $data = Pemohon::find($id);
+        $datas = Pemohon::where('id', $id)->get();
+        $data = $datas->map(function($item, $key){
+            $item->kecamatan_id = $item->kelurahan->kecamatan->id;
+            return $item;
+        })->first();
         $selectKec = Kecamatan::all();
         $selectAga = Agama::all();
-        $selectKel = Kelurahan::all();
-        return view('pemohon.edit',compact('data'));
+        $selectKel = Kelurahan::where('kecamatan_id', $data->kecamatan_id)->get();
+        return view('pemohon.edit',compact('data','selectKec','selectAga','selectKel'));
     }
-    public function update(Request $req)
+
+    public function update(Request $req, $id)
     {
-        $d = Kecamatan::find($req->idedit);
-        $d->fill($req->all());
-        $d->save();
+        $tgl = Carbon::parse($req->tgl_lahir)->format('Y-m-d');
+        $s = Pemohon::find($id);
+        $s->nik                   = $req->nik;
+        $s->nama                  = $req->nama;
+        $s->jkel                  = $req->jkel;
+        $s->tgl_lahir             = $tgl;
+        $s->tempat_lahir          = $req->tempat_lahir;
+        $s->alamat                = $req->alamat;
+        $s->kelurahan_id          = $req->kelurahan_id;
+        $s->agama_id              = $req->agama_id;
+        $s->pekerjaan             = $req->pekerjaan;
+        $s->save();
         Alert::Success('Senna', 'Berhasil DiUpdate');
-        return back();
+        return redirect('/pemohon');
     }
 
     public function delete($id)
     {
         try {
-            $d = Kecamatan::find($id);
+            $d = Pemohon::find($id);
             $d->delete();
             Alert::Success('Senna', 'Berhasil Di hapus');
         }
         catch(\Exception $e) {
-            Alert::error('Senna', 'Tidak Bisa Di Hapus! Ada Data Kelurahan Di Kecamatan Ini');
+            Alert::error('Senna', 'Tidak Bisa Di Hapus! Ada Data Berkas Terkait Pada Pemohon Ini');
+        }
+        return back();
+    }
+
+    public function storeAkun(Request $req)
+    {
+        $cek = User::where('email', $req->email)->first();
+        $roleUser = Role::where('name','user')->first();
+        if($cek == null)
+        {
+            //Save Akun pemohon
+            $s = new User;
+            $s->name = $req->name;
+            $s->email = $req->email;
+            $s->password = bcrypt($req->password);
+            $s->save();
+            $s->attachRole($roleUser);
+
+            //Update User ID Pemohon
+            $p = Pemohon::find($req->idpemohon);
+            $p->user_id = $s->id;
+            $p->save();
+
+            Alert::success('Senna', 'Berhasil Disimpan');
+        }
+        else {
+            Alert::error('Senna', 'Email Sudah Ada');
         }
         return back();
     }

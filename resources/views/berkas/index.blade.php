@@ -3,13 +3,13 @@
 @section('content')
 <div class="alert alert-info alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <h4><i class="icon fa fa-info"></i> Pemohon</h4>
-    Adalah Halaman Untuk membuat biodata pemohon yang mengajukan berkas sertifikat
+    <h4><i class="icon fa fa-info"></i> Ajukan Berkas</h4>
+    Adalah Halaman Untuk meajukan berkas sertifikat tanah
 </div>
 
 <div class="row">
   <div class="col-md-6">
-  <a href="{{route('addPemohon')}}" class="btn btn-primary">Tambah</a><br /><br />
+  <a href="{{route('addBerkas')}}" class="btn btn-primary">Tambah</a><br /><br />
   </div>
 </div>
       <div class="box box-primary">
@@ -18,10 +18,10 @@
                     <thead>
                     <tr>
                       <th>No</th>
-                      <th>NIK</th>
+                      <th>Nomor Berkas</th>
                       <th>Nama Pemohon</th>
-                      <th>Gender</th>
-                      <th>Akun</th>
+                      <th>Peruntukan</th>
+                      <th>Status</th>
                       <th>Aksi</th>
                     </tr>
                     </thead>
@@ -32,19 +32,13 @@
                       @foreach ($data as $dt)
                         <tr>
                         <td>{{$no++}}</td>
-                        <td>{{$dt->nik}}</td>
-                        <td>{{$dt->nama}}</td>
-                        <td>{{$dt->jkel}}</td>
+                        <td>{{$dt->nomor}}</td>
+                        <td>{{$dt->pemohon->nama}}</td>
+                        <td>{{$dt->peruntukan}}</td>
+                        <td>{{$dt->status}}</td>
                         <td>
-                          @if($dt->user_id == null)
-                        <button type="button" class="btn btn-xs btn-primary add-akun" data-id="{{$dt->id}}" data-nama="{{$dt->nama}}">Buat Akun</button>
-                          @else
-                          {{$dt->user_id}}
-                          @endif
-                        </td>
-                        <td>
-                          <a href={{url("pemohon/edit/{$dt->id}")}} class="btn btn-xs btn-success"><i class="fa fa-edit"></i> </a>
-                          <a href={{url("pemohon/delete/{$dt->id}")}} class="btn btn-xs btn-danger" onclick="return confirm('Yakin Ingin Menghapus Data Ini..?');"><i class="fa fa-trash"></i> </a>
+                          <a href={{url("berkas/edit/{$dt->id}")}} class="btn btn-xs btn-success"><i class="fa fa-edit"></i> </a>
+                          <a href={{url("berkas/delete/{$dt->id}")}} class="btn btn-xs btn-danger" onclick="return confirm('Yakin Ingin Menghapus Data Ini..?');"><i class="fa fa-trash"></i> </a>
                           
                         </td>
                         </tr>

@@ -31,7 +31,7 @@ class Pemohon extends Migration
             ->onUpdate('cascade')->onDelete('restrict');
             
             $table->foreign('user_id')->references('id')->on('users')
-            ->onUpdate('cascade')->onDelete('cascade');
+            ->onUpdate('cascade')->onDelete('set null');
         });
     }
 

@@ -9,4 +9,9 @@ class Instansi extends Model
     protected $table = 'instansi';
 
     protected $fillable = ['kode', 'jenis'];
+    
+    public function berkas()
+    {
+        return $this->hasMany(Berkas::class);
+    }
 }

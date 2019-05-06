@@ -34,7 +34,14 @@ class UserController extends Controller
         $roleAdmin = Role::where('name','admin')->first();
         if($cek == null)
         {
-            User::create($req->all())->attachRole($roleAdmin);
+            
+            $s = new User;
+            $s->name = $req->name;
+            $s->email = $req->email;
+            $s->password = bcrypt($req->password);
+            $s->save();
+            $s->attachRole($roleUser);
+            
             Alert::success('Senna', 'Berhasil Disimpan');
         }
         else {
