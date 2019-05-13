@@ -108,7 +108,7 @@
                   <div class="form-group">
                         <label class="col-sm-3 control-label">Kecamatan</label>
                         <div class="col-sm-9">
-                          <select id="kecamatan" class="form-control select2" style="width: 100%;" name="kecamatan_id">
+                          <select id="kecamatan" class="form-control select2" style="width: 100%;" name="kecamatan_id" required>
                             @foreach ($select as $s)
                                   <option value="{{$s->id}}">{{$s->nama}}</option>
                             @endforeach
