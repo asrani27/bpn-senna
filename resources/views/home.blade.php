@@ -20,8 +20,8 @@
                       </select>
                     </div>
                     <div class="col-sm-2">
-                      <button>Search</button>
-                      <button>All</button>
+                      <button class="btn btn-sm btn-primary">Search</button>
+                      <button class="btn btn-sm btn-primary">All</button>
                     </div>
                   </div>
                 </div>
