@@ -10,8 +10,7 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MENU UTAMA</li>
       <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li><a href="{{route('berkas')}}"><i class="fa fa-dashboard"></i> Ajukan Berkas</a></li>Z
-      <li><a href="{{route('berkas')}}"><i class="fa fa-dashboard"></i> Menu baru</a></li>Z
+      <li><a href="{{route('berkas')}}"><i class="fa fa-dashboard"></i> Ajukan Berkas</a></li>
     </ul>
 
     <ul class="sidebar-menu" data-widget="tree">
