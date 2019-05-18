@@ -59,7 +59,8 @@
       
     <div class="row">
     </div>
-    <center><img class="" src="{{url('LTE/logo1.png')}}">
+    <center>
+      {{-- <img class="" src="{{url('LTE/logo1.png')}}"> --}}
         <h2 class="widget-user-username"><b>APLIKASI BPN SKRIPSI SENNA</b></h2>
         <h4 class="widget-user-desc"><b>Kalimantan Selatan</b></h4></center>
     <div class="row">
