@@ -94,7 +94,7 @@
         <!-- /.modal-content -->
       </div>
       <!-- /.modal-dialog -->
-    </div>
+  </div>
 
     <div class="modal fade" id="editUser">
         <div class="modal-dialog">
@@ -142,7 +142,7 @@
           <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
-      </div>
+    </div>
 @endsection
 
 @push('add_js')

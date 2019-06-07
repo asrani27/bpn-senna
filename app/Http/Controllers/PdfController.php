@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PDF;
 use Carbon\Carbon;
-use App\Agenda;
+use App\Pemohon;
+use App\Berkas;
 
 class PdfController extends Controller
 {
@@ -14,12 +15,58 @@ class PdfController extends Controller
         $this->middleware('auth');
     }
 
-    public function agendaAll()
+    public function pemohon(Request $request)
     {
-        $now = Carbon::now()->format('Y-m-d-h-i-s');
-        $data = Agenda::orderBy('id','desc')->get();
-        $pdf = PDF::loadView('pdf.totalAgenda', compact('data'))->setPaper('f4', 'landscape');
-        return $pdf->download($now.'totalAgenda.pdf');
+        $tglmulai = $request->tgl_mulai;
+        $explode  = explode('/', $tglmulai);
+        $month    = $explode[0];
+        $day      = $explode[1];
+        $year     = $explode[2];
+        $extglmulai = ($year."-".$month."-".$day);
+    
+        $tglakhir   = $request->tgl_akhir;
+        $explode    = explode('/', $tglakhir);
+        $month      = $explode[0];
+        $day       = $explode[1];
+        $year       = $explode[2];
+        $extglakhir = ($year."-".$month."-".$day);
+    
+        $no   = rand(0,10000);
+        $tgl  = Carbon::now()->format('d M Y');
+        $data = Pemohon::whereBetween('created_at', array($extglmulai, $extglakhir))->get();
+        $pdf  = PDF::loadView('pdf.pdfpemohon', compact('data','tglmulai','tglakhir'))->setPaper('f4', 'landscape');
+        return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
+    }
+
+    public function pemohonAll()
+    {
+        $no   = rand(0,10000);
+        $data = Pemohon::all();
+        $pdf  = PDF::loadView('pdf.pdfpemohonall', compact('data'))->setPaper('f4', 'landscape');
+        return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
+    }
+
+    public function berkas(Request $request)
+    {
+        $tglmulai = $request->tgl_mulai;
+        $explode  = explode('/', $tglmulai);
+        $month    = $explode[0];
+        $day      = $explode[1];
+        $year     = $explode[2];
+        $extglmulai = ($year."-".$month."-".$day);
+    
+        $tglakhir   = $request->tgl_akhir;
+        $explode    = explode('/', $tglakhir);
+        $month      = $explode[0];
+        $day       = $explode[1];
+        $year       = $explode[2];
+        $extglakhir = ($year."-".$month."-".$day);
+        $no   = rand(0,10000);
+        $tgl  = Carbon::now()->format('d M Y');
+        $data = Berkas::whereBetween('created_at', array($extglmulai, $extglakhir))->get();
+        $pdf  = PDF::loadView('pdf.pdfberkas', compact('data','tglmulai','tglakhir'))->setPaper('f4', 'landscape');
+        
+        return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
     }
 
     public function agendaToday()

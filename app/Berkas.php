@@ -23,6 +23,6 @@ class Berkas extends Model
 
     public function instansi()
     {
-        return $this->belonsTo(Instansi::class);
+        return $this->belongsTo(Instansi::class);
     }
 }

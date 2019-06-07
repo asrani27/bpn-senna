@@ -85,7 +85,14 @@ Route::post('/berkas/update', 'BerkasController@update')->name('updateBerkas');
 Route::get('/berkas/delete/{id}', 'BerkasController@delete');
 Route::get('/berkas/dataDesa/{id}', 'PemohonController@dataDesa');
 
+//Route Untuk Laporan
+Route::get('/lappemohon', 'LaporanController@pemohon')->name('lap.pemohon');
+Route::get('/lapberkas', 'LaporanController@berkas')->name('lap.berkas');
 
+//Route Untuk Print
+Route::post('/pdf/pemohon', 'PdfController@pemohon')->name('pdfpemohon');
+Route::post('/pdf/berkas', 'PdfController@berkas')->name('pdfberkas');
+Route::get('/pdf/pemohon/all', 'PdfController@pemohonAll')->name('lap.pemohon.all');
 
 // Route::get('/home/delete/{id}', 'HomeController@delete');
 // Route::get('/home/edit/{id}', 'HomeController@edit');
