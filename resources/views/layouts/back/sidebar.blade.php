@@ -10,10 +10,10 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MENU UTAMA</li>
       <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li><a href="{{route('berkas')}}"><i class="fa fa-dashboard"></i> Ajukan Berkas</a></li>
+      <li><a href="{{route('berkas')}}"><i class="fa fa-share"></i> Ajukan Berkas</a></li>
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-files-o"></i>
+          <i class="fa fa-toggle-down"></i>
           <span>Master Data</span>
         </a>
         <ul class="treeview-menu">
@@ -26,7 +26,7 @@
 
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-files-o"></i>
+          <i class="fa fa-toggle-down"></i>
           <span>Laporan</span>
         </a>
         <ul class="treeview-menu">
@@ -37,7 +37,7 @@
 
       <li class="treeview">
         <a href="#">
-          <i class="fa fa-files-o"></i>
+          <i class="fa fa-toggle-down"></i>
           <span>Setting</span>
         </a>
         <ul class="treeview-menu">
