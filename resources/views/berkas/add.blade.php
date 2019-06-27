@@ -70,7 +70,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Jenis</label>
                 <div class="col-sm-10">
-                  <select id="kecamatan" class="form-control select2" style="width: 100%;" name="instansi_id">
+                  <select id="jenis" class="form-control select2" style="width: 100%;" name="instansi_id">
                             <option value="" selected></option>    
                         @foreach ($instansi as $s)
                             <option value="{{$s->id}}">{{$s->jenis}}</option>
@@ -137,6 +137,7 @@ function dataDesa()
 {
   var e = document.getElementById("kecamatan");
   var id = e.options[e.selectedIndex].value;
+  //alert(id);
   $.ajax({
             type: 'GET',
             url: 'dataDesa/' + id,
