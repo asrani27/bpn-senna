@@ -20,12 +20,12 @@
 <div class="alert alert-success alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <h4><i class="icon fa fa-info"></i> Laporan Pemohon</h4>
-    Adalah Halaman Untuk Mencetak Laporan Data Pemohon dalam Bentuk PDF, di bawah ini bisa mencetak semua dan per periode
+    Adalah Halaman Untuk Mencetak Laporan Data Pemohon, di bawah ini bisa mencetak semua dan per periode
 </div>
 
 <div class="box box-primary">
     <div class="box-body">
-        <form method="POST" action="{{route('pdfpemohon')}}">
+        <form method="POST" action="{{route('pdfpemohon')}}" target="_blank">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label>Mulai Tanggal :</label>
@@ -45,14 +45,14 @@
                         <input type="text" class="form-control" id="datepicker2" value={{ Carbon\Carbon::today()->format('m/d/Y') }} name="tgl_akhir" required />
                     </div><!-- /.input group -->
                 </div><!-- /.form group -->
-            <button type="submit" class="btn btn-sm btn-primary">Print PDF</button>
+            <button type="submit" class="btn btn-sm btn-primary">Print</button>
             <a href={{url('/home')}} class="btn btn-sm btn-danger">Kembali</a>
         </form>
     </div>
 </div>
 <div class="box box-primary">
     <div class="box-body">
-        <a href={{route('lap.pemohon.all')}} class="btn btn-sm btn-primary">Print Semua</a>  
+        <a href={{route('lap.pemohon.all')}} class="btn btn-sm btn-primary" target="_blank">Print Semua</a>  
     </div>
 </div>
 @endsection

@@ -48,6 +48,14 @@ class BerkasController extends Controller
         return redirect('/berkas');
     }
 
+    public function update(Request $req, $id)
+    {
+        $d = Berkas::find($id);
+        $d->fill($req->all());
+        $d->save();
+        Alert::Success('Senna', 'Berhasil DiUpdate');
+        return redirect('/berkas');
+    }
     public function delete($id)
     {
         try {
@@ -59,5 +67,16 @@ class BerkasController extends Controller
             Alert::error('Senna', 'Tidak Bisa Di Hapus! Ada Data Pemohon Yang Terkait dengan Agama Ini');
         }
         return back();
+    }
+
+    public function edit($id)
+    {
+        $d = Berkas::find($id); 
+        $pemohon = Pemohon::all();
+        $kelurahan = Kelurahan::all();
+        $instansi = Instansi::all();
+        $kecamatan = Kecamatan::all();
+        
+        return view('berkas.edit',compact('pemohon','kelurahan','instansi','kecamatan','d'));
     }
 }

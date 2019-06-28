@@ -35,7 +35,8 @@ class PdfController extends Controller
         $tgl  = Carbon::now()->format('d M Y');
         $data = Pemohon::whereBetween('created_at', array($extglmulai, $extglakhir))->get();
         $pdf  = PDF::loadView('pdf.pdfpemohon', compact('data','tglmulai','tglakhir'))->setPaper('f4', 'landscape');
-        return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
+        return view('pdf.pdfpemohon',compact('data','tglmulai','tglakhir'));
+        //return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
     }
 
     public function pemohonAll()
@@ -43,7 +44,8 @@ class PdfController extends Controller
         $no   = rand(0,10000);
         $data = Pemohon::all();
         $pdf  = PDF::loadView('pdf.pdfpemohonall', compact('data'))->setPaper('f4', 'landscape');
-        return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
+        return view('pdf.pdfpemohonall',compact('data'));
+        //return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
     }
 
     public function berkas(Request $request)
@@ -65,8 +67,8 @@ class PdfController extends Controller
         $tgl  = Carbon::now()->format('d M Y');
         $data = Berkas::whereBetween('created_at', array($extglmulai, $extglakhir))->get();
         $pdf  = PDF::loadView('pdf.pdfberkas', compact('data','tglmulai','tglakhir'))->setPaper('f4', 'landscape');
-        
-        return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
+        return view('pdf.pdfberkas',compact('data','tglmulai','tglakhir'));
+        //return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
     }
 
     public function agendaToday()

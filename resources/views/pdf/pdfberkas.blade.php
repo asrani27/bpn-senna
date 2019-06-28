@@ -1,5 +1,6 @@
 <html><head>
     <link rel="stylesheet" type="text/css" href="{{url('LTE/stylepdf.css')}}">
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 </head><body>
 
     <h2 class="text-center"><b class="text-primary">Aplikasi BPN SENNA</b></h2>   
@@ -33,4 +34,10 @@
                     </tr>
                   @endforeach
     </table>	
-</body></html>
+</body>
+<script>
+	$( document ).ready(function() {
+		  window.print();
+	});
+    </script>
+    </html>

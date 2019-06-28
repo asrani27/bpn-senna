@@ -20,12 +20,12 @@
 <div class="alert alert-success alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
     <h4><i class="icon fa fa-info"></i> Laporan Berkas</h4>
-    Adalah Halaman Untuk Mencetak Laporan Pengajuan Berkas Dari Pemohon dalam Bentuk PDF.
+    Adalah Halaman Untuk Mencetak Laporan Pengajuan Berkas Dari Pemohon.
 </div>
 
 <div class="box box-primary">
     <div class="box-body">
-        <form method="POST" action="{{route('pdfberkas')}}">
+        <form method="POST" action="{{route('pdfberkas')}}" target="_blank">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label>Mulai Tanggal :</label>
@@ -45,7 +45,7 @@
                         <input type="text" class="form-control" id="datepicker2" value={{ Carbon\Carbon::today()->format('m/d/Y') }} name="tgl_akhir" required />
                     </div><!-- /.input group -->
                 </div><!-- /.form group -->
-            <button type="submit" class="btn btn-sm btn-primary">Print PDF</button>
+            <button type="submit" class="btn btn-sm btn-primary">Print</button>
             <a href={{url('/home')}} class="btn btn-sm btn-danger">Kembali</a>
         </form>
     </div>

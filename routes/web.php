@@ -81,8 +81,9 @@ Route::post('/pemohon/akun/save', 'PemohonController@storeAkun')->name('saveAkun
 Route::get('/berkas', 'BerkasController@index')->name('berkas');
 Route::get('/berkas/add', 'BerkasController@add')->name('addBerkas');
 Route::post('/berkas/save', 'BerkasController@store')->name('saveBerkas');
-Route::post('/berkas/update', 'BerkasController@update')->name('updateBerkas');
+Route::post('/berkas/update/{id}', 'BerkasController@update')->name('updateBerkas');
 Route::get('/berkas/delete/{id}', 'BerkasController@delete');
+Route::get('/berkas/edit/{id}', 'BerkasController@edit');
 Route::get('/berkas/dataDesa/{id}', 'PemohonController@dataDesa');
 
 //Route Untuk Laporan
