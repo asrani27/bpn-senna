@@ -7,6 +7,7 @@ use App\Agenda;
 use Carbon\Carbon;
 use Alert;
 use App\Berkas;
+use App\Status;
 use Mapper;
 
 class HomeController extends Controller
@@ -30,15 +31,29 @@ class HomeController extends Controller
     {
         Mapper::map(-3.31985, 114.60206, ['zoom' => 14, 'marker' => false, 'gestureHandling' => 'greedy', 'scrollWheelZoom' => false]);
         $berkas = Berkas::all();
-        foreach($berkas as $b)
+        $status = Status::all();
+        $map = $berkas->map(function($item)use($status){
+            $item->icon = $status->where('id', $item->status)->first()->icon;
+            $item->status = $status->where('id', $item->status)->first()->nama_status;
+            return $item;
+        });
+
+        foreach($map as $b)
         {
             Mapper::informationWindow($b->lat, $b->long, 
             "Nomor : {$b->nomor} <br>
             Nama : {$b->pemohon->nama} <br>
             Luas : {$b->luas} <br>
             Status : {$b->status} <br>
+            <img src='http://localhost:8000/storage/{$b->foto}' width='100px'>
             ", 
-            ['open' => false, 'maxWidth'=> 300, 'markers' => ['title' => 'Title', 'autoClose' => true]]);
+            ['icon' => $b->icon,
+            'open' => false, 
+            'maxWidth'=> 300, 
+            'markers' => 
+                ['title' => 'Title', 'autoClose' => true]
+            ]
+            );
         }
         
         return view('home',compact('berkas'));

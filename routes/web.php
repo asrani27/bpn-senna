@@ -43,6 +43,14 @@ Route::post('/role/save', 'RoleController@store')->name('saverole');
 Route::get('/role/delete/{id}', 'RoleController@delete');
 Route::post('/role/update', 'RoleController@update')->name('updateRole');
 
+//Route Status
+Route::get('/status', 'StatusController@index')->name('status');
+Route::get('/status/add', 'StatusController@add')->name('addStatus');
+Route::post('/status/save', 'StatusController@store')->name('savestatus');
+Route::get('/status/delete/{id}', 'StatusController@delete');
+Route::get('/status/edit/{id}', 'StatusController@edit');
+Route::post('/status/update/{id}', 'StatusController@update')->name('updatestatus');
+
 // Route Instansi
 Route::get('/instansi', 'InstansiController@index')->name('instansi');
 Route::post('/instansi/save', 'InstansiController@store')->name('saveInstansi');

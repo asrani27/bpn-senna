@@ -8,6 +8,7 @@ use App\Kelurahan;
 use App\Instansi;
 use App\Kecamatan;
 use App\Pemohon;
+use App\Status;
 use Alert;
 use Auth;
 
@@ -21,40 +22,100 @@ class BerkasController extends Controller
 
     public function index()
     {
-        $data = Berkas::all();
+        $berkas = Berkas::all();
+        $status = Status::all();
+        $data = $berkas->map(function($item)use($status){
+            $item->status = $status->where('id',$item->status)->first()->nama_status;
+            return $item;
+        });
         return view('berkas.index',compact('data'));
     }
 
     public function add()
     {
         $pemohon = Pemohon::all();
+        $status = Status::all();
         $kelurahan = Kelurahan::all();
         $instansi = Instansi::all();
         $kecamatan = Kecamatan::all();
-        return view('berkas.add',compact('pemohon','kelurahan','instansi','kecamatan'));
+        return view('berkas.add',compact('pemohon','kelurahan','instansi','kecamatan','status'));
     }
 
     public function store(Request $req)
     {
         $cekNomor = Berkas::where('nomor', $req->nomor)->first();
-        if($cekNomor == null)
+        if($req->hasFile('foto'))
         {
-            Berkas::create($req->all());
-            Alert::Success('Senna', 'Berhasil Disimpan');
+            $filename = $req->foto->getClientOriginalName();
+            $req->foto->storeAs('/public',$filename);
+            //dd($filename);
+            if($cekNomor == null)
+            {
+                $s = new Berkas;
+                $s->nomor        = $req->nomor;
+                $s->pemohon_id   = $req->pemohon_id;
+                $s->lat          = $req->lat;
+                $s->long         = $req->long;
+                $s->kelurahan_id = $req->kelurahan_id;
+                $s->luas         = $req->luas;
+                $s->instansi_id  = $req->instansi_id;
+                $s->peruntukan   = $req->peruntukan;
+                $s->status       = $req->status;
+                $s->keterangan   = $req->peruntukan;
+                $s->foto         = $filename;
+                $s->save();
+                Alert::Success('Senna', 'Berhasil Disimpan');
+            }
+            else {
+                Alert::error('Senna', 'Nomor Berkas Sudah Ada');
+            }
+            return redirect('/berkas'); 
         }
-        else {
-            Alert::error('Senna', 'Nomor Berkas Sudah Ada');
+        else
+        {
+            if($cekNomor == null)
+            {
+                Berkas::create($req->except('foto'));
+                Alert::Success('Senna', 'Berhasil Disimpan');
+            }
+            else {
+                Alert::error('Senna', 'Nomor Berkas Sudah Ada');
+            }
+            return redirect('/berkas');   
         }
-        return redirect('/berkas');
     }
 
     public function update(Request $req, $id)
     {
-        $d = Berkas::find($id);
-        $d->fill($req->all());
-        $d->save();
-        Alert::Success('Senna', 'Berhasil DiUpdate');
-        return redirect('/berkas');
+        if($req->hasFile('foto'))
+        {
+            $filename = $req->foto->getClientOriginalName();
+            $req->foto->storeAs('/public',$filename);
+            //dd($filename);
+                $s = Berkas::find($id);
+                $s->nomor        = $req->nomor;
+                $s->pemohon_id   = $req->pemohon_id;
+                $s->lat          = $req->lat;
+                $s->long         = $req->long;
+                $s->kelurahan_id = $req->kelurahan_id;
+                $s->luas         = $req->luas;
+                $s->instansi_id  = $req->instansi_id;
+                $s->peruntukan   = $req->peruntukan;
+                $s->status       = $req->status;
+                $s->keterangan   = $req->peruntukan;
+                $s->foto         = $filename;
+                $s->save();
+                Alert::Success('Senna', 'Berhasil DiUpdate');
+            return redirect('/berkas'); 
+        }
+        else
+        {
+            $d = Berkas::find($id);
+            $d->fill($req->all());
+            $d->save();
+            Alert::Success('Senna', 'Berhasil DiUpdate');
+            return redirect('/berkas');  
+        }
     }
     public function delete($id)
     {
@@ -73,10 +134,11 @@ class BerkasController extends Controller
     {
         $d = Berkas::find($id); 
         $pemohon = Pemohon::all();
+        $status = Status::all();
         $kelurahan = Kelurahan::all();
         $instansi = Instansi::all();
         $kecamatan = Kecamatan::all();
-        
-        return view('berkas.edit',compact('pemohon','kelurahan','instansi','kecamatan','d'));
+        //dd($d);
+        return view('berkas.edit',compact('pemohon','kelurahan','instansi','kecamatan','d','status'));
     }
 }

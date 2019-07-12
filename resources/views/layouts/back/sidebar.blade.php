@@ -42,6 +42,7 @@
           <span>Setting</span>
         </a>
         <ul class="treeview-menu">
+          <li><a href="{{route('status')}}"><i class="fa fa-circle"></i> Status</a></li>
           <li><a href="{{route('role')}}"><i class="fa fa-circle"></i> Roles</a></li>
           <li><a href="{{route('user')}}"><i class="fa fa-users"></i> Account</a></li>
         </ul>

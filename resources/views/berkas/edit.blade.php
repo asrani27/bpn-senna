@@ -17,7 +17,7 @@
 @endpush
 @section('content')
 <div class="box box-primary">
-<form class="form-horizontal" action="{{route('updateBerkas', $d->id)}}" method="POST">
+<form class="form-horizontal" action="{{route('updateBerkas', $d->id)}}" method="POST" enctype="multipart/form-data">
             {{ csrf_field() }}
           <div class="box-body">
             <br />
@@ -113,13 +113,28 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Status</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="status" required value="{{$d->status}}">
+                      <select id="status" class="form-control select2" style="width: 100%;" required name="status">
+                                <option value="" selected></option>    
+                                @foreach ($status as $s)
+                                  @if($s->id == (int)$d->status)
+                                    <option value="{{$s->id}}" selected>{{$s->nama_status}}</option>
+                                    @else
+                                    <option value="{{$s->id}}">{{$s->nama_status}}</option>
+                                    @endif
+                                @endforeach
+                      </select>
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Keterangan</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="keterangan" value="{{$d->keterangan}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Foto</label>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control" name="foto">
                 </div>
             </div>
           </div>

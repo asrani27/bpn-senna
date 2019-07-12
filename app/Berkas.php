@@ -9,7 +9,7 @@ class Berkas extends Model
     protected $table = 'berkas';
 
     protected $fillable = ['nomor', 'pemohon_id', 'lat', 'long', 'kelurahan_id', 'luas', 'instansi_id',
-                            'peruntukan', 'status', 'keterangan'];
+                            'peruntukan', 'status', 'keterangan','foto'];
 
     public function pemohon()
     {
