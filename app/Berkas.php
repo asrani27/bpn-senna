@@ -24,5 +24,10 @@ class Berkas extends Model
     public function instansi()
     {
         return $this->belongsTo(Instansi::class);
+    } 
+
+    public function upload()
+    {
+        return $this->hasMany(Upload::class);
     }
 }

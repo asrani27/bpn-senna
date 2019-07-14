@@ -37,6 +37,8 @@
                         <td>{{$dt->peruntukan}}</td>
                         <td>{{$dt->status}}</td>
                         <td>
+
+                          <a href={{url("berkas/upload/{$dt->id}")}} class="btn btn-xs btn-primary">Upload Berkas </a>
                           <a href={{url("berkas/edit/{$dt->id}")}} class="btn btn-xs btn-success"><i class="fa fa-edit"></i> </a>
                           <a href={{url("berkas/delete/{$dt->id}")}} class="btn btn-xs btn-danger" onclick="return confirm('Yakin Ingin Menghapus Data Ini..?');"><i class="fa fa-trash"></i> </a>
                           

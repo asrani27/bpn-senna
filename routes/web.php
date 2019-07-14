@@ -94,6 +94,10 @@ Route::get('/berkas/delete/{id}', 'BerkasController@delete');
 Route::get('/berkas/edit/{id}', 'BerkasController@edit');
 Route::get('/berkas/dataDesa/{id}', 'PemohonController@dataDesa');
 
+Route::get('/berkas/upload/{id}', 'BerkasController@upload');
+Route::get('/berkas/upload/{id}/delete', 'BerkasController@uploadDelete');
+Route::post('/berkas/upload/store/{id}', 'BerkasController@uploadStore')->name('saveUpload');
+
 //Route Untuk Laporan
 Route::get('/lappemohon', 'LaporanController@pemohon')->name('lap.pemohon');
 Route::get('/lapberkas', 'LaporanController@berkas')->name('lap.berkas');

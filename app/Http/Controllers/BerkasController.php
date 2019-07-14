@@ -9,6 +9,7 @@ use App\Instansi;
 use App\Kecamatan;
 use App\Pemohon;
 use App\Status;
+use App\Upload;
 use Alert;
 use Auth;
 
@@ -140,5 +141,38 @@ class BerkasController extends Controller
         $kecamatan = Kecamatan::all();
         //dd($d);
         return view('berkas.edit',compact('pemohon','kelurahan','instansi','kecamatan','d','status'));
+    }
+
+    public function upload($id)
+    {
+        $data = Berkas::find($id);
+        $foto = $data->upload;
+        //dd($foto);
+        //dd($berkas);
+        return view('berkas.upload',compact('data','foto'));
+    }
+
+    public function uploadStore(Request $req, $id)
+    {
+         if($req->hasFile('file'))
+        {
+            $filename = $req->file->getClientOriginalName();
+            $req->file->storeAs('/public/berkas',$filename);
+                $s = new Upload;
+                $s->judul      = $req->judul;
+                $s->filename   = $filename;
+                $s->berkas_id  = $id;
+                $s->save();
+            Alert::Success('Senna', 'Berhasil Di Upload');
+            return back(); 
+        }
+    }
+
+    public function uploadDelete($id)
+    {
+            $d = Upload::find($id);
+            $d->delete();
+            Alert::Success('Senna', 'Berhasil Di Hapus');
+            return back(); 
     }
 }
