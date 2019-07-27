@@ -31,6 +31,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Route Arsip
+Route::get('/arsip', 'ArsipController@index')->name('arsip');
+Route::get('/arsip/add', 'ArsipController@add')->name('addArsip');
+Route::post('/arsip/store', 'ArsipController@store')->name('saveArsip');
+
 //Route User
 Route::get('/user', 'UserController@index')->name('user');
 Route::post('/user/simpan', 'UserController@store')->name('simpanuser');
@@ -100,12 +105,30 @@ Route::post('/berkas/upload/store/{id}', 'BerkasController@uploadStore')->name('
 
 //Route Untuk Laporan
 Route::get('/lappemohon', 'LaporanController@pemohon')->name('lap.pemohon');
+Route::get('/lapbersertifikat', 'LaporanController@bersertifikat')->name('lap.bersertifikat');
+Route::get('/laparsip', 'LaporanController@arsip')->name('lap.arsip');
 Route::get('/lapberkas', 'LaporanController@berkas')->name('lap.berkas');
+Route::get('/lapberkasselesai', 'LaporanController@berkasselesai')->name('lap.berkasselesai');
+Route::get('/laptunggakan', 'LaporanController@tunggakan')->name('lap.tunggakan');
+Route::get('/lapberkas/cetak', 'LaporanController@cetakberkas')->name('lap.cetakberkas');
+Route::get('/lappetugasukur', 'LaporanController@petugasukur')->name('lap.petugasukur');
+Route::get('/lapnonpertanian', 'LaporanController@nonpertanian')->name('lap.nonpertanian');
+Route::get('/lappertanian', 'LaporanController@pertanian')->name('lap.pertanian');
+Route::get('/lapinstansi', 'LaporanController@instansi')->name('lap.instansi');
 
 //Route Untuk Print
 Route::post('/pdf/pemohon', 'PdfController@pemohon')->name('pdfpemohon');
 Route::post('/pdf/berkas', 'PdfController@berkas')->name('pdfberkas');
+Route::get('/pdf/berkasselesai', 'PdfController@berkasselesai')->name('lap.berkasselesai.all');
+Route::post('/pdf/cetakberkas', 'PdfController@cetakberkas')->name('pdfcetakberkas');
 Route::get('/pdf/pemohon/all', 'PdfController@pemohonAll')->name('lap.pemohon.all');
+Route::get('/pdf/bersertifikat', 'PdfController@bersertifikat')->name('lap.bersertifikat.all');
+Route::get('/pdf/tunggakan', 'PdfController@tunggakan')->name('lap.tunggakan.all');
+Route::get('/pdf/arsip', 'PdfController@arsip')->name('lap.arsip.all');
+Route::get('/pdf/petugasukur', 'PdfController@petugasukur')->name('lap.petugasukur.all');
+Route::get('/pdf/nonpertanian', 'PdfController@nonpertanian')->name('lap.nonpertanian.all');
+Route::get('/pdf/pertanian', 'PdfController@pertanian')->name('lap.pertanian.all');
+Route::get('/pdf/instansi', 'PdfController@instansi')->name('lap.instansi.all');
 
 // Route::get('/home/delete/{id}', 'HomeController@delete');
 // Route::get('/home/edit/{id}', 'HomeController@edit');

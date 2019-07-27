@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class Arsip extends Model
 {
-    protected $table = 'status';
+    protected $table = 'arsip';
 
     public function berkas()
     {
-    	return $this->hasMany(Berkas::class);
+    	return $this->belongsTo(Berkas::class);
     }
 }

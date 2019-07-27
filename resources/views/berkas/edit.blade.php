@@ -132,6 +132,25 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-sm-2 control-label">Status Tunggakan</label>
+                <div class="col-sm-10">
+                      <select id="status" class="form-control select2" style="width: 100%;" required name="tunggakan">
+                                <option value="tidak" selected>Tidak</option>
+                                <option value="ya" selected>Ya</option>
+                      </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Kawasan</label>
+                <div class="col-sm-10">
+                      <select id="status" class="form-control select2" style="width: 100%;" required name="kawasan">
+                                
+                                <option value="non pertanian" selected>Non Pertanian</option>
+                                <option value="pertanian" selected>Pertanian</option>
+                      </select>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-sm-2 control-label">Foto</label>
                 <div class="col-sm-10">
                     <input type="file" class="form-control" name="foto">

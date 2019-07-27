@@ -39,7 +39,8 @@ class BerkasController extends Controller
         $kelurahan = Kelurahan::all();
         $instansi = Instansi::all();
         $kecamatan = Kecamatan::all();
-        return view('berkas.add',compact('pemohon','kelurahan','instansi','kecamatan','status'));
+        $no_berkas = count(Berkas::all()) + 1;
+        return view('berkas.add',compact('pemohon','kelurahan','instansi','kecamatan','status', 'no_berkas'));
     }
 
     public function store(Request $req)
@@ -63,6 +64,8 @@ class BerkasController extends Controller
                 $s->peruntukan   = $req->peruntukan;
                 $s->status       = $req->status;
                 $s->keterangan   = $req->peruntukan;
+                $s->tunggakan    = $req->tunggakan;
+                $s->kawasan      = $req->kawasan;
                 $s->foto         = $filename;
                 $s->save();
                 Alert::Success('Senna', 'Berhasil Disimpan');
@@ -104,6 +107,8 @@ class BerkasController extends Controller
                 $s->peruntukan   = $req->peruntukan;
                 $s->status       = $req->status;
                 $s->keterangan   = $req->peruntukan;
+                $s->tunggakan    = $req->tunggakan;
+                $s->kawasan      = $req->kawasan;
                 $s->foto         = $filename;
                 $s->save();
                 Alert::Success('Senna', 'Berhasil DiUpdate');

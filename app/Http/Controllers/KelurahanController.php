@@ -20,7 +20,8 @@ class KelurahanController extends Controller
     {
         $data = Kelurahan::all();
         $select = Kecamatan::all();
-        return view('kelurahan.index',compact('data','select'));
+        $no_kel = count($data) + 1;
+        return view('kelurahan.index',compact('data','select','no_kel'));
     }
 
     public function store(Request $req)

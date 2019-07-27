@@ -7,7 +7,9 @@ use PDF;
 use Carbon\Carbon;
 use App\Pemohon;
 use App\Berkas;
+use App\Status;
 
+use App\Arsip;
 class PdfController extends Controller
 {
     public function __construct()
@@ -48,6 +50,66 @@ class PdfController extends Controller
         //return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
     }
 
+    public function bersertifikat()
+    {
+        $no   = rand(0,10000);
+        $data = Arsip::all();
+        //$pdf  = PDF::loadView('pdf.print_bersertifikat', compact('data'))->setPaper('f4', 'landscape');
+        return view('pdf.print_bersertifikat',compact('data'));
+        //return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
+    }
+
+    public function arsip()
+    {
+        $no   = rand(0,10000);
+        $data = Arsip::all();
+        //$pdf  = PDF::loadView('pdf.print_bersertifikat', compact('data'))->setPaper('f4', 'landscape');
+        return view('pdf.print_arsip',compact('data'));
+        //return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
+    }
+
+     public function tunggakan()
+    {
+        return view('pdf.print_tunggakan');
+    }
+
+     public function petugasukur()
+    {
+        return view('pdf.print_petugasukur');
+    }
+
+
+     public function nonpertanian()
+    {
+        return view('pdf.print_nonpertanian');
+    }
+
+
+     public function pertanian()
+    {
+        return view('pdf.print_pertanian');
+    }
+
+     public function instansi()
+    {
+        return view('pdf.print_instansi');
+    }
+
+    public function berkasselesai()
+    {
+        $no   = rand(0,10000);
+        $berkas = Berkas::where('status', 5)->get();
+        $data = $berkas->map(function($item){
+            $item->nama_status = Status::where('id', 5)->first()->nama_status;
+            return $item;
+        });
+
+        //dd($data);
+        //$pdf  = PDF::loadView('pdf.print_bersertifikat', compact('data'))->setPaper('f4', 'landscape');
+        return view('pdf.print_berkasselesai',compact('data'));
+        //return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
+    }
+
     public function berkas(Request $request)
     {
         $tglmulai = $request->tgl_mulai;
@@ -69,6 +131,26 @@ class PdfController extends Controller
         $pdf  = PDF::loadView('pdf.pdfberkas', compact('data','tglmulai','tglakhir'))->setPaper('f4', 'landscape');
         return view('pdf.pdfberkas',compact('data','tglmulai','tglakhir'));
         //return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');
+    }
+
+    public function cetakberkas(Request $request)
+    {
+        $no   = rand(0,10000);
+        $tgl  = Carbon::now()->format('d M Y');
+        $data = Berkas::where('id',$request->id_berkas)->get();
+        $map  = $data->map(function ($item){
+            $item->nik_pemohon = $item->pemohon->nik;
+            $item->nama_pemohon = $item->pemohon->nama;
+            $item->jkel_pemohon = $item->pemohon->jkel;
+            $item->tgl_lahir_pemohon = $item->pemohon->tgl_lahir;
+            $item->tempat_lahir_pemohon = $item->pemohon->tempat_lahir;
+            $item->alamat_pemohon = $item->pemohon->alamat;
+            return $item;
+        })->first();
+        //dd($map);
+        $pdf  = PDF::loadView('pdf.pdfcetakberkas', compact('map'));
+        return view('pdf.pdfcetakberkas',compact('map','tglmulai','tglakhir'));
+        //return $pdf->download($no.'pdfcetakberkas'.date("Y-m-D-H:m:s").'.pdf');
     }
 
     public function agendaToday()

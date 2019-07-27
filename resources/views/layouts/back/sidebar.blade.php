@@ -12,6 +12,7 @@
       <li class="header">MENU UTAMA</li>
       <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
       <li><a href="{{route('berkas')}}"><i class="fa fa-share"></i> Ajukan Berkas</a></li>
+      <li><a href="{{route('arsip')}}"><i class="fa fa-share"></i> Arsip</a></li>
       <li class="treeview">
         <a href="#">
           <i class="fa fa-toggle-down"></i>
@@ -31,8 +32,17 @@
           <span>Laporan</span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="{{route('lap.berkas')}}"><i class="fa fa-circle"></i>Lap. Berkas</a></li>
-          <li><a href="{{route('lap.pemohon')}}"><i class="fa fa-circle"></i>Lap. Pemohon</a></li>
+          <li><a href="{{route('lap.cetakberkas')}}"><i class="fa fa-circle"></i>Cetak Berkas Untuk Pemohon</a></li>
+          <li><a href="{{route('lap.berkas')}}"><i class="fa fa-circle"></i>Lap. Bulanan Berkas</a></li>
+          <li><a href="{{route('lap.berkasselesai')}}"><i class="fa fa-circle"></i>Lap. Berkas Selesai</a></li>
+          <li><a href="{{route('lap.tunggakan')}}"><i class="fa fa-circle"></i>Lap. Tunggakan Berkas</a></li>
+          <li><a href="{{route('lap.bersertifikat')}}"><i class="fa fa-circle"></i>Lap. Tanah Bersertifikat</a></li>
+          <li><a href="{{route('lap.petugasukur')}}"><i class="fa fa-circle"></i>Lap. Petugas Ukur</a></li>
+          <li><a href="{{route('lap.arsip')}}"><i class="fa fa-circle"></i>Lap. Arsip</a></li>
+          <li><a href="{{route('lap.nonpertanian')}}"><i class="fa fa-circle"></i>Lap. Kawasan Non Pertanian</a></li>
+          <li><a href="{{route('lap.pertanian')}}"><i class="fa fa-circle"></i>Lap. Kawasan Pertanian</a></li>
+          <li><a href="{{route('lap.instansi')}}"><i class="fa fa-circle"></i>Lap. Data Instansi</a></li>
+          <li><a href="{{route('lap.pemohon')}}"><i class="fa fa-circle"></i>Lap. Data Pemohon</a></li>
         </ul>
       </li>
 
@@ -52,9 +62,8 @@
     @elseif(Auth::user()->hasRole('user'))
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MENU UTAMA</li>
-      <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-      <li><a href="#"><i class="fa fa-share"></i>Berkas Saya</a></li>
-      <li><a href="#"><i class="fa fa-share"></i>Profil Saya</a></li>
+      <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Cek Berkas</a></li>
+      <li><a href="#"><i class="fa fa-share"></i>Tanah Bersertifikat</a></li>
       <li><a href="{{route('logout')}}"><i class="fa fa-close"></i> Logout</a></li>
     </ul>
     @endif

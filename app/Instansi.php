@@ -8,7 +8,7 @@ class Instansi extends Model
 {
     protected $table = 'instansi';
 
-    protected $fillable = ['kode', 'jenis'];
+    protected $fillable = ['kode', 'nama', 'jenis'];
     
     public function berkas()
     {

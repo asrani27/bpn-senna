@@ -14,7 +14,6 @@
             <th>Luas</th>
             <th>Instansi</th>
             <th>Peruntukan</th>
-            <th>Status</th>
             <th>Keterangan</th>
         </tr>
         <?php
@@ -29,15 +28,14 @@
                     <td>{{$dt->luas}}</td>
                     <td>{{$dt->instansi->jenis}}</td>
                     <td>{{$dt->peruntukan}}</td>
-                    <td>{{$dt->status}}</td>
                     <td>{{$dt->keterangan}}</td>
                     </tr>
                   @endforeach
-    </table>	
-</body>
+    </table>
+    
 <script>
-	$( document ).ready(function() {
-		  window.print();
-	});
-    </script>
-    </html>
+    $( document ).ready(function() {
+          window.print();
+    });
+</script>	
+</body></html>

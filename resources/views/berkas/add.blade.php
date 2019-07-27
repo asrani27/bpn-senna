@@ -24,7 +24,7 @@
             <div class="form-group">
               <label class="col-sm-2 control-label">Nomor Berkas</label>
               <div class="col-sm-10">
-              <input type="text" class="form-control" name="nomor" required onkeypress="return hanyaAngka(event)" >
+              <input type="text" class="form-control" name="nomor" required value="B0{{$no_berkas}}" onkeypress="return hanyaAngka(event)" >
               </div>
             </div>
 
@@ -68,12 +68,12 @@
             </div>
             
             <div class="form-group">
-                <label class="col-sm-2 control-label">Jenis</label>
+                <label class="col-sm-2 control-label">Nama Instansi</label>
                 <div class="col-sm-10">
                   <select id="jenis" class="form-control select2" style="width: 100%;" name="instansi_id">
                             <option value="" selected></option>    
                         @foreach ($instansi as $s)
-                            <option value="{{$s->id}}">{{$s->jenis}}</option>
+                            <option value="{{$s->id}}">{{$s->nama}}</option>
                         @endforeach
                   </select>
                 </div>
@@ -118,6 +118,25 @@
                 <label class="col-sm-2 control-label">Keterangan</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="keterangan">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Status Tunggakan</label>
+                <div class="col-sm-10">
+                      <select id="status" class="form-control select2" style="width: 100%;" required name="tunggakan">
+                                <option value="tidak" selected>Tidak</option>
+                                <option value="ya" selected>Ya</option>
+                      </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Kawasan</label>
+                <div class="col-sm-10">
+                      <select id="status" class="form-control select2" style="width: 100%;" required name="kawasan">
+                                
+                                <option value="non pertanian" selected>Non Pertanian</option>
+                                <option value="pertanian" selected>Pertanian</option>
+                      </select>
                 </div>
             </div>
             <div class="form-group">

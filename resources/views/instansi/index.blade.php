@@ -20,6 +20,7 @@
                     <tr>
                       <th>No</th>
                       <th>Kode</th>
+                      <th>Nama Instansi</th>
                       <th>Jenis Instansi</th>
                       <th>Aksi</th>
                     </tr>
@@ -32,9 +33,10 @@
                         <tr>
                         <td>{{$no++}}</td>
                         <td>{{$dt->kode}}</td>
+                        <td>{{$dt->nama}}</td>
                         <td>{{$dt->jenis}}</td>
                         <td>
-                            <button type="button" class="btn btn-xs btn-success edit-user"  data-id="{{$dt->id}}" data-kode="{{$dt->kode}}" data-jenis="{{$dt->jenis}}"><i class="fa fa-edit"></i> </button>
+                            <button type="button" class="btn btn-xs btn-success edit-user"  data-id="{{$dt->id}}" data-kode="{{$dt->kode}}" data-jenis="{{$dt->jenis}}" data-nama="{{$dt->nama}}"><i class="fa fa-edit"></i> </button>
                             <a href={{url("instansi/delete/{$dt->id}")}} class="btn btn-xs btn-danger" onclick="return confirm('Yakin Ingin Menghapus Data Ini..?');"><i class="fa fa-trash"></i> </a>
                           
                         </td>
@@ -59,7 +61,13 @@
                   <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Kode</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="kode" name="kode" required>
+                        <input type="text" class="form-control" id="kode" value="INS0{{$ins}}" name="kode" required>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">Nama Instanso</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="nama" name="nama" required>
                       </div>
                   </div>
                   <div class="form-group">
@@ -99,6 +107,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">Nama Instansi</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="enama" name="nama">
+                      </div>
+                    </div>
+                    <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">Jenis Instansi</label>
                       <div class="col-sm-10">
                         <input type="text" class="form-control" id="ejenis" name="jenis">
@@ -122,13 +136,14 @@
 
 $(document).ready(function() {
   $(document).on('click', '.add', function() {
-      document.getElementById("kode").value = "";
+      document.getElementById("nama").value = "";
       document.getElementById("jenis").value = "";
       $('#add').modal('show');
   });
 
   $(document).on('click', '.edit-user', function() {
     $('#idedit').val($(this).data('id'));
+    $('#enama').val($(this).data('nama'));
     $('#ekode').val($(this).data('kode'));
     $('#ejenis').val($(this).data('jenis'));
     $('#editUser').modal('show');

@@ -17,7 +17,8 @@ class InstansiController extends Controller
     public function index()
     {
         $data = Instansi::all();
-        return view('instansi.index',compact('data'));
+        $ins = count($data) + 1;
+        return view('instansi.index',compact('data','ins'));
     }
 
     public function store(Request $req)
@@ -25,15 +26,15 @@ class InstansiController extends Controller
         $cekKode = Instansi::where('kode', $req->kode)->first();
         if($cekKode == null)
         {
-            $cekJenis = Instansi::where('jenis', $req->jenis)->first();
-            if($cekJenis == null)
-            {
+            // $cekJenis = Instansi::where('jenis', $req->jenis)->first();
+            // if($cekJenis == null)
+            // {
                 Instansi::create($req->all());
                 Alert::Success('Senna', 'Berhasil Disimpan');
-            }
-            else {
-                Alert::error('Senna', 'Jenis Sudah Ada');
-            }
+            // }
+            // else {
+            //     Alert::error('Senna', 'Jenis Sudah Ada');
+            // }
         }
         else {
             Alert::error('Senna', 'Kode Sudah Ada');

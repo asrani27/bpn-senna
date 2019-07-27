@@ -17,7 +17,9 @@ class KecamatanController extends Controller
     public function index()
     {
         $data = Kecamatan::all();
-        return view('kecamatan.index',compact('data'));
+
+        $no_kec = count($data) + 1;
+        return view('kecamatan.index',compact('data','no_kec'));
     }
 
     public function store(Request $req)

@@ -72,7 +72,7 @@
                   <div class="form-group">
                       <label for="inputEmail3" class="col-sm-3 control-label">Kode</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" id="kode" name="kode" required>
+                        <input type="text" class="form-control" id="kode" value="KEL0{{$no_kel}}" name="kode" required>
                       </div>
                   </div>
                   <div class="form-group">
@@ -146,7 +146,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
   $(document).on('click', '.add', function() {
-      document.getElementById("kode").value = "";
+      //document.getElementById("kode").value = "";
       document.getElementById("nama").value = "";
       $('#add').modal('show');
   });
