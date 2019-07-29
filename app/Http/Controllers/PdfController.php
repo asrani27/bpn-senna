@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use PDF;
 use Carbon\Carbon;
 use App\Pemohon;
+use App\Petugas;
+use App\Instansi;
 use App\Berkas;
 use App\Status;
 
@@ -70,37 +72,44 @@ class PdfController extends Controller
 
      public function tunggakan()
     {
-        return view('pdf.print_tunggakan');
+        $berkas = Berkas::where('tunggakan', 'ya')->get();
+        //dd($berkas);
+        return view('pdf.print_tunggakan',compact('berkas'));
     }
 
      public function petugasukur()
     {
-        return view('pdf.print_petugasukur');
+        $data = Berkas::all();
+        return view('pdf.print_petugasukur',compact('data'));
     }
 
 
      public function nonpertanian()
     {
-        return view('pdf.print_nonpertanian');
+        $data = Berkas::where('kawasan', 'non pertanian')->get();
+        //dd($data);
+        return view('pdf.print_nonpertanian',compact('data'));
     }
 
 
      public function pertanian()
     {
-        return view('pdf.print_pertanian');
+        $data = Berkas::where('kawasan', 'pertanian')->get();
+        return view('pdf.print_pertanian',compact('data'));
     }
 
      public function instansi()
     {
-        return view('pdf.print_instansi');
+        $data = Instansi::all();
+        return view('pdf.print_instansi',compact('data'));
     }
 
-    public function berkasselesai()
+    public function berkasselesai(Request $req)
     {
         $no   = rand(0,10000);
-        $berkas = Berkas::where('status', 5)->get();
+        $berkas = Berkas::where('status_id', $req->status_id)->get();
         $data = $berkas->map(function($item){
-            $item->nama_status = Status::where('id', 5)->first()->nama_status;
+            $item->nama_status = $item->status->nama_status;
             return $item;
         });
 
@@ -127,7 +136,7 @@ class PdfController extends Controller
         $extglakhir = ($year."-".$month."-".$day);
         $no   = rand(0,10000);
         $tgl  = Carbon::now()->format('d M Y');
-        $data = Berkas::whereBetween('created_at', array($extglmulai, $extglakhir))->get();
+        $data = Berkas::whereBetween('created_at', array($extglmulai.' 00:00:00', $extglakhir.' 23:59:59'))->get();
         $pdf  = PDF::loadView('pdf.pdfberkas', compact('data','tglmulai','tglakhir'))->setPaper('f4', 'landscape');
         return view('pdf.pdfberkas',compact('data','tglmulai','tglakhir'));
         //return $pdf->download($no.'pdfreport'.date("Y-m-D-H:m:s").'.pdf');

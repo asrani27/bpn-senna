@@ -57,6 +57,18 @@ Telp (0512) 21078.</td>
 		<td class="auto-style3"><strong>Peruntukan</strong></td>
 		<td class="auto-style3"><strong>Keterangan</strong></td>
 	</tr>
+	<?php
+	$no = 1;
+	?>
+	@foreach($berkas as $dt)
+	<tr>
+		<td class="auto-style7">{{$no++}}</td>
+		<td class="auto-style7">{{$dt->pemohon->nama}}</td>
+		<td class="auto-style7">{{$dt->instansi->nama}}</td>
+		<td class="auto-style7">{{$dt->peruntukan}}</td>
+		<td class="auto-style7">{{$dt->keterangan}}</td>
+	</tr>
+	@endforeach	
 </table>
 
 <p>&nbsp;</p>

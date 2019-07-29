@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PDF;
 use App\Berkas;
+use App\Status;
 
 class LaporanController extends Controller
 {
@@ -36,7 +37,8 @@ class LaporanController extends Controller
 
     public function berkasselesai()
     {
-        return view('laporan.berkasselesai');
+        $status = Status::all();
+        return view('laporan.berkasselesai',compact('status'));
     }
 
     public function tunggakan()

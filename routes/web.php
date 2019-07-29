@@ -127,7 +127,7 @@ Route::get('/lapinstansi', 'LaporanController@instansi')->name('lap.instansi');
 //Route Untuk Print
 Route::post('/pdf/pemohon', 'PdfController@pemohon')->name('pdfpemohon');
 Route::post('/pdf/berkas', 'PdfController@berkas')->name('pdfberkas');
-Route::get('/pdf/berkasselesai', 'PdfController@berkasselesai')->name('lap.berkasselesai.all');
+Route::post('/pdf/berkasselesai', 'PdfController@berkasselesai')->name('lap.berkasselesai.all');
 Route::post('/pdf/cetakberkas', 'PdfController@cetakberkas')->name('pdfcetakberkas');
 Route::get('/pdf/pemohon/all', 'PdfController@pemohonAll')->name('lap.pemohon.all');
 Route::get('/pdf/bersertifikat', 'PdfController@bersertifikat')->name('lap.bersertifikat.all');

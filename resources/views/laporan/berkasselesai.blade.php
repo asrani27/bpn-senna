@@ -24,7 +24,23 @@
 </div>
 <div class="box box-primary">
     <div class="box-body">
-        <a href={{route('lap.berkasselesai.all')}} class="btn btn-sm btn-primary" target="_blank">Print</a>  
+        <form method="POST" action="{{route('lap.berkasselesai.all')}}" target="_blank">
+                {{ csrf_field() }}
+
+
+            <div class="form-group">
+                    <label class="col-sm-2 control-label">Pilih Berkas</label>
+                    <div class="col-sm-10">
+                      <select class="form-control select2" style="width: 100%;" name="status_id">
+                        @foreach($status as $b)
+                          <option value="{{$b->id}}">{{$b->nama_status}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+            </div>
+    
+            <button type="submit" class="btn btn-sm btn-primary">Print</button>
+        </form>
     </div>
 </div>
 @endsection

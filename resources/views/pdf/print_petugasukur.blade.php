@@ -52,11 +52,27 @@ Telp (0512) 21078.</td>
 <table align="left" cellpadding="3" cellspacing="0" class="auto-style2" style="width: 100%">
 	<tr>
 		<td class="auto-style3"><strong>No</strong></td>
-		<td class="auto-style3"><strong>Pemohon</strong></td>
-		<td class="auto-style3"><strong>Instansi</strong></td>
+		<td class="auto-style3"><strong>Nama Petugas</strong></td>
+		<td class="auto-style3"><strong>No Berkas</strong></td>
+		<td class="auto-style3"><strong>Luas</strong></td>
+		<td class="auto-style3"><strong>Kecamatan</strong></td>
+		<td class="auto-style3"><strong>Kelurahan</strong></td>
 		<td class="auto-style3"><strong>Peruntukan</strong></td>
-		<td class="auto-style3"><strong>Keterangan</strong></td>
 	</tr>
+	<?php
+	$no = 1;
+	?>
+	@foreach($data as $dt)
+	<tr>
+		<td class="auto-style7">{{$no++}}</td>
+		<td class="auto-style7">{{$dt->petugas->nama}}</td>
+		<td class="auto-style7">{{$dt->nomor}}</td>
+		<td class="auto-style7">{{$dt->luas}}</td>
+		<td class="auto-style7">{{$dt->kelurahan->kecamatan->nama}}</td>
+		<td class="auto-style7">{{$dt->kelurahan->nama}}</td>
+		<td class="auto-style7">{{$dt->peruntukan}}</td>
+	</tr>
+	@endforeach	
 </table>
 
 <p>&nbsp;</p>
