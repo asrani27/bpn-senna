@@ -10,6 +10,7 @@ use App\Kecamatan;
 use App\Pemohon;
 use App\Status;
 use App\Upload;
+use App\Petugas;
 use Alert;
 use Auth;
 
@@ -25,8 +26,25 @@ class BerkasController extends Controller
     {
         $berkas = Berkas::all();
         $status = Status::all();
+
         $data = $berkas->map(function($item)use($status){
-            $item->status = $status->where('id',$item->status)->first()->nama_status;
+            if($item->status_id == null)
+            {
+                $item->status = '-';
+            }
+            else
+            {
+                $item->status = $item->status->nama_status;
+            }
+            if($item->petugas_id == null)
+            {
+                $item->petugas = '-';
+            }
+            else
+            {
+                $item->petugas = $item->petugas->nama;
+            }
+            
             return $item;
         });
         return view('berkas.index',compact('data'));
@@ -34,13 +52,14 @@ class BerkasController extends Controller
 
     public function add()
     {
-        $pemohon = Pemohon::all();
-        $status = Status::all();
+        $pemohon   = Pemohon::all();
+        $status    = Status::all();
         $kelurahan = Kelurahan::all();
-        $instansi = Instansi::all();
+        $instansi  = Instansi::all();
         $kecamatan = Kecamatan::all();
+        $petugas   = Petugas::all();
         $no_berkas = count(Berkas::all()) + 1;
-        return view('berkas.add',compact('pemohon','kelurahan','instansi','kecamatan','status', 'no_berkas'));
+        return view('berkas.add',compact('pemohon','kelurahan','instansi','kecamatan','status', 'no_berkas','petugas'));
     }
 
     public function store(Request $req)
@@ -62,11 +81,12 @@ class BerkasController extends Controller
                 $s->luas         = $req->luas;
                 $s->instansi_id  = $req->instansi_id;
                 $s->peruntukan   = $req->peruntukan;
-                $s->status       = $req->status;
-                $s->keterangan   = $req->peruntukan;
+                $s->status_id    = $req->status_id;
+                $s->keterangan   = $req->keterangan;
                 $s->tunggakan    = $req->tunggakan;
                 $s->kawasan      = $req->kawasan;
                 $s->foto         = $filename;
+                $s->petugas_id   = $req->petugas_id;
                 $s->save();
                 Alert::Success('Senna', 'Berhasil Disimpan');
             }
@@ -144,8 +164,9 @@ class BerkasController extends Controller
         $kelurahan = Kelurahan::all();
         $instansi = Instansi::all();
         $kecamatan = Kecamatan::all();
+        $petugas   = Petugas::all();
         //dd($d);
-        return view('berkas.edit',compact('pemohon','kelurahan','instansi','kecamatan','d','status'));
+        return view('berkas.edit',compact('pemohon','kelurahan','instansi','kecamatan','d','status','petugas'));
     }
 
     public function upload($id)

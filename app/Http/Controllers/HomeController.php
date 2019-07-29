@@ -29,12 +29,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        Mapper::map(-3.31985, 114.60206, ['zoom' => 14, 'marker' => false, 'gestureHandling' => 'greedy', 'scrollWheelZoom' => false]);
+        Mapper::map(-3.798144, 114.747211, ['zoom' => 14, 'marker' => false, 'gestureHandling' => 'greedy', 'scrollWheelZoom' => false]);
         $berkas = Berkas::all();
         $status = Status::all();
         $map = $berkas->map(function($item)use($status){
-            $item->icon = $status->where('id', $item->status)->first()->icon;
-            $item->status = $status->where('id', $item->status)->first()->nama_status;
+            if($item->status_id == null)
+            {
+                $item->icon = $status->first()->icon;
+                $item->status = '-';
+            }
+            else
+            {
+                $item->icon = $item->status->icon;
+                $item->status = $item->status->nama_status;
+            }
             return $item;
         });
 

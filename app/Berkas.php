@@ -9,11 +9,16 @@ class Berkas extends Model
     protected $table = 'berkas';
 
     protected $fillable = ['nomor', 'pemohon_id', 'lat', 'long', 'kelurahan_id', 'luas', 'instansi_id',
-                            'peruntukan', 'status', 'keterangan','foto'];
+                            'peruntukan', 'status_id', 'keterangan', 'tunggakan', 'foto', 'kawasan', 'petugas_id'];
 
     public function pemohon()
     {
         return $this->belongsTo(Pemohon::class);
+    }
+
+    public function petugas()
+    {
+        return $this->belongsTo(Petugas::class);
     }
 
     public function kelurahan()

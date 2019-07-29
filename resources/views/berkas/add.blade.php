@@ -106,7 +106,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Status</label>
                 <div class="col-sm-10">
-                      <select id="status" class="form-control select2" style="width: 100%;" required name="status">
+                      <select id="status" class="form-control select2" style="width: 100%;" required name="status_id">
                                 <option value="" selected></option>    
                                 @foreach ($status as $s)
                                     <option value="{{$s->id}}">{{$s->nama_status}}</option>
@@ -143,6 +143,17 @@
                 <label class="col-sm-2 control-label">Foto</label>
                 <div class="col-sm-10">
                     <input type="file" class="form-control" name="foto">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Petugas</label>
+                <div class="col-sm-10">
+                      <select id="status" class="form-control select2" style="width: 100%;" required name="petugas_id">
+                                <option value="" selected></option>    
+                                @foreach ($petugas as $s)
+                                    <option value="{{$s->id}}">{{$s->nama}}</option>
+                                @endforeach
+                      </select>
                 </div>
             </div>
           </div>
@@ -212,7 +223,7 @@ var map;
 var markers = [];
 
 function initMap() {
-  var mapHss = {lat: -3.31921, lng: 114.60292};
+  var mapHss = {lat: -3.798144, lng: 114.747211};
 
   map = new google.maps.Map(document.getElementById('mapHss'), {
     zoom: 15,

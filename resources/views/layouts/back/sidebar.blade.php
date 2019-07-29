@@ -23,7 +23,9 @@
           <li><a href="{{route('kecamatan')}}"><i class="fa fa-circle"></i> Kecamatan</a></li>
           <li><a href="{{route('kelurahan')}}"><i class="fa fa-circle"></i> Kelurahan / Desa</a></li>
           <li><a href="{{route('instansi')}}"><i class="fa fa-circle"></i> jenis Instansi</a></li>
-          <li><a href="{{route('agama')}}"><i class="fa fa-circle"></i> Agama</a></li> </ul>
+          <li><a href="{{route('agama')}}"><i class="fa fa-circle"></i> Agama</a></li>
+          <li><a href="{{route('petugas')}}"><i class="fa fa-circle"></i> Petugas</a></li>
+        </ul>
       </li>
 
       <li class="treeview">

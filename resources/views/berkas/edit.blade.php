@@ -113,10 +113,10 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Status</label>
                 <div class="col-sm-10">
-                      <select id="status" class="form-control select2" style="width: 100%;" required name="status">
+                      <select id="status" class="form-control select2" style="width: 100%;" required name="status_id">
                                 <option value="" selected></option>    
                                 @foreach ($status as $s)
-                                  @if($s->id == (int)$d->status)
+                                  @if($s->id == (int)$d->status_id)
                                     <option value="{{$s->id}}" selected>{{$s->nama_status}}</option>
                                     @else
                                     <option value="{{$s->id}}">{{$s->nama_status}}</option>
@@ -135,8 +135,13 @@
                 <label class="col-sm-2 control-label">Status Tunggakan</label>
                 <div class="col-sm-10">
                       <select id="status" class="form-control select2" style="width: 100%;" required name="tunggakan">
+                        @if($d->tunggakan == 'tidak')
                                 <option value="tidak" selected>Tidak</option>
+                                <option value="ya">Ya</option>
+                        @else
+                                <option value="tidak" >Tidak</option>
                                 <option value="ya" selected>Ya</option>
+                        @endif
                       </select>
                 </div>
             </div>
@@ -144,9 +149,13 @@
                 <label class="col-sm-2 control-label">Kawasan</label>
                 <div class="col-sm-10">
                       <select id="status" class="form-control select2" style="width: 100%;" required name="kawasan">
-                                
-                                <option value="non pertanian" selected>Non Pertanian</option>
+                                @if($d->kawasan == 'pertanian')
+                                <option value="non pertanian">Non Pertanian</option>
                                 <option value="pertanian" selected>Pertanian</option>
+                                @else
+                                <option value="non pertanian" selected>Non Pertanian</option>
+                                <option value="pertanian" >Pertanian</option>
+                                @endif
                       </select>
                 </div>
             </div>
@@ -156,6 +165,21 @@
                     <input type="file" class="form-control" name="foto">
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Petugas</label>
+                <div class="col-sm-10">
+                  <select id="agama" class="form-control select2" style="width: 100%;" name="petugas_id" required>
+                    <option value="" selected>--Pilih--</option>     
+                    @foreach ($petugas as $s)
+                        @if($s->id == $d->petugas_id)
+                        <option value="{{$s->id}}" selected>{{$s->nama}}</option>
+                        @else
+                        <option value="{{$s->id}}">{{$s->nama}}</option>
+                        @endif
+                      @endforeach
+                  </select>
+                </div>
+              </div>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
@@ -223,7 +247,7 @@ var map;
 var markers = [];
 
 function initMap() {
-  var mapHss = {lat: -3.31921, lng: 114.60292};
+  var mapHss = {lat: -3.798144, lng: 114.747211};
 
   map = new google.maps.Map(document.getElementById('mapHss'), {
     zoom: 15,

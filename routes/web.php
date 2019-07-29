@@ -62,6 +62,14 @@ Route::post('/instansi/save', 'InstansiController@store')->name('saveInstansi');
 Route::post('/instansi/update', 'InstansiController@update')->name('updateInstansi');
 Route::get('/instansi/delete/{id}', 'InstansiController@delete');
 
+// Route Petugas
+Route::get('/petugas', 'PetugasController@index')->name('petugas');
+Route::get('/petugas/add', 'PetugasController@add')->name('addPetugas');
+Route::post('/petugas/save', 'PetugasController@store')->name('savePetugas');
+Route::post('/petugas/update/{id}', 'PetugasController@update')->name('updatePetugas');
+Route::get('/petugas/delete/{id}', 'PetugasController@delete');
+Route::get('/petugas/edit/{id}', 'PetugasController@edit');
+
 //Route Kecamatan
 Route::get('/kecamatan', 'KecamatanController@index')->name('kecamatan');
 Route::post('/kecamatan/save', 'KecamatanController@store')->name('saveKecamatan');
