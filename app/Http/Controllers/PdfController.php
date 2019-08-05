@@ -162,6 +162,26 @@ class PdfController extends Controller
         //return $pdf->download($no.'pdfcetakberkas'.date("Y-m-D-H:m:s").'.pdf');
     }
 
+    public function ttdberkas(Request $request)
+    {
+        $no   = rand(0,10000);
+        $tgl  = Carbon::now()->format('d M Y');
+        $data = Berkas::where('id',$request->id_berkas)->get();
+        $map  = $data->map(function ($item){
+            $item->nik_pemohon = $item->pemohon->nik;
+            $item->nama_pemohon = $item->pemohon->nama;
+            $item->jkel_pemohon = $item->pemohon->jkel;
+            $item->tgl_lahir_pemohon = $item->pemohon->tgl_lahir;
+            $item->tempat_lahir_pemohon = $item->pemohon->tempat_lahir;
+            $item->alamat_pemohon = $item->pemohon->alamat;
+            return $item;
+        })->first();
+        //dd($map);
+        //$pdf  = PDF::loadView('pdf.pdfcetakberkas', compact('map'));
+        return view('pdf.print_ttdberkas',compact('map','tglmulai','tglakhir'));
+        //return $pdf->download($no.'pdfcetakberkas'.date("Y-m-D-H:m:s").'.pdf');
+    }
+
     public function agendaToday()
     {
         $now = Carbon::now()->format('Y-m-d-h-i-s');

@@ -39,12 +39,12 @@
                   </select>
                 </div>
               </div>
-            <div class="form-group">
+            {{-- <div class="form-group">
                     <label class="col-sm-2 control-label">No HAK Pakai</label>
                     <div class="col-sm-10">
                     <input type="text" class="form-control" name="no_hak_pakai" required>
                     </div>
-            </div>
+            </div> --}}
           </div>
           <!-- /.box-body -->
           <div class="box-footer">

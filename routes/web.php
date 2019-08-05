@@ -30,6 +30,8 @@ Route::get('logout', function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/cariberkas', 'HomeController@cariberkas')->name('cariberkas');
+Route::get('/direction', 'HomeController@direction')->name('direction');
 
 //Route Arsip
 Route::get('/arsip', 'ArsipController@index')->name('arsip');
@@ -123,12 +125,14 @@ Route::get('/lappetugasukur', 'LaporanController@petugasukur')->name('lap.petuga
 Route::get('/lapnonpertanian', 'LaporanController@nonpertanian')->name('lap.nonpertanian');
 Route::get('/lappertanian', 'LaporanController@pertanian')->name('lap.pertanian');
 Route::get('/lapinstansi', 'LaporanController@instansi')->name('lap.instansi');
+Route::get('/lapttdberkas', 'LaporanController@ttdberkas')->name('lap.ttdberkas');
 
 //Route Untuk Print
 Route::post('/pdf/pemohon', 'PdfController@pemohon')->name('pdfpemohon');
 Route::post('/pdf/berkas', 'PdfController@berkas')->name('pdfberkas');
 Route::post('/pdf/berkasselesai', 'PdfController@berkasselesai')->name('lap.berkasselesai.all');
 Route::post('/pdf/cetakberkas', 'PdfController@cetakberkas')->name('pdfcetakberkas');
+Route::post('/pdf/ttdberkas', 'PdfController@ttdberkas')->name('pdfttdberkas');
 Route::get('/pdf/pemohon/all', 'PdfController@pemohonAll')->name('lap.pemohon.all');
 Route::get('/pdf/bersertifikat', 'PdfController@bersertifikat')->name('lap.bersertifikat.all');
 Route::get('/pdf/tunggakan', 'PdfController@tunggakan')->name('lap.tunggakan.all');
@@ -137,6 +141,9 @@ Route::get('/pdf/petugasukur', 'PdfController@petugasukur')->name('lap.petugasuk
 Route::get('/pdf/nonpertanian', 'PdfController@nonpertanian')->name('lap.nonpertanian.all');
 Route::get('/pdf/pertanian', 'PdfController@pertanian')->name('lap.pertanian.all');
 Route::get('/pdf/instansi', 'PdfController@instansi')->name('lap.instansi.all');
+
+
+Route::get('/sertifikatuser', 'MemberController@index')->name('sertifikatuser');
 
 // Route::get('/home/delete/{id}', 'HomeController@delete');
 // Route::get('/home/edit/{id}', 'HomeController@edit');

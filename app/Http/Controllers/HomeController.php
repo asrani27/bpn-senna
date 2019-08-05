@@ -67,12 +67,58 @@ class HomeController extends Controller
         return view('home',compact('berkas'));
     }
 
+    public function cariberkas(Request $req)
+    {
+        $berkas = Berkas::where('id', $req->berkas_id)->get();
+        Mapper::map($berkas->first()->lat, $berkas->first()->long, ['zoom' => 14, 'marker' => false, 'gestureHandling' => 'greedy', 'scrollWheelZoom' => false]);
+        $status = Status::all();
+        $map = $berkas->map(function($item)use($status){
+            if($item->status_id == null)
+            {
+                $item->icon = $status->first()->icon;
+                $item->status = '-';
+            }
+            else
+            {
+                $item->icon = $item->status->icon;
+                $item->status = $item->status->nama_status;
+            }
+            return $item;
+        });
+
+        foreach($map as $b)
+        {
+            Mapper::informationWindow($b->lat, $b->long, 
+            "Nomor : {$b->nomor} <br>
+            Nama : {$b->pemohon->nama} <br>
+            Luas : {$b->luas} <br>
+            Status : {$b->status} <br>
+            <img src='http://localhost:8000/storage/{$b->foto}' width='100px'>
+            ", 
+            ['icon' => $b->icon,
+            'open' => false, 
+            'maxWidth'=> 300, 
+            'markers' => 
+                ['title' => 'Title', 'autoClose' => true]
+            ]
+            );
+        }
+        
+        return view('home',compact('berkas'));
+    }
+
     public function delete($id)
     {
         $data = Agenda::find($id);
         $data->delete();
         Alert::success('Diskominfo','Berhasil Di Hapus');
         return back();
+    }
+
+    public function direction()
+    {
+        $berkas = Berkas::all();
+        return view('direction',compact('berkas'));
     }
 
     public function edit($id)

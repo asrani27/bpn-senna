@@ -25,6 +25,12 @@ class LaporanController extends Controller
         return view('laporan.cetakberkas',compact('berkas'));
     }
 
+    public function ttdberkas()
+    {
+        $berkas = Berkas::all();
+        return view('laporan.ttdberkas',compact('berkas'));
+    }
+
     public function bersertifikat()
     {
         return view('laporan.bersertifikat');

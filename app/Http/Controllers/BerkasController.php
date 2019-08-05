@@ -74,6 +74,7 @@ class BerkasController extends Controller
             {
                 $s = new Berkas;
                 $s->nomor        = $req->nomor;
+                $s->no_hak_pakai = $req->no_hak_pakai;
                 $s->pemohon_id   = $req->pemohon_id;
                 $s->lat          = $req->lat;
                 $s->long         = $req->long;
@@ -118,6 +119,7 @@ class BerkasController extends Controller
             //dd($filename);
                 $s = Berkas::find($id);
                 $s->nomor        = $req->nomor;
+                $s->no_hak_pakai = $req->no_hak_pakai;
                 $s->pemohon_id   = $req->pemohon_id;
                 $s->lat          = $req->lat;
                 $s->long         = $req->long;

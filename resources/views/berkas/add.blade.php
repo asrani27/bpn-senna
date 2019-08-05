@@ -29,6 +29,13 @@
             </div>
 
             <div class="form-group">
+              <label class="col-sm-2 control-label">Nomor HAK Pakai</label>
+              <div class="col-sm-10">
+              <input type="text" class="form-control" name="no_hak_pakai" required>
+              </div>
+            </div>
+
+            <div class="form-group">
                 <label class="col-sm-2 control-label">NIK Pemohon</label>
                 <div class="col-sm-10">
                   <select id="agama" class="form-control select2" style="width: 100%;" name="pemohon_id" required>

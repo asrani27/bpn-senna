@@ -34,6 +34,7 @@
           <span>Laporan</span>
         </a>
         <ul class="treeview-menu">
+          <li><a href="{{route('lap.ttdberkas')}}"><i class="fa fa-circle"></i>Tanda Terima Berkas</a></li>
           <li><a href="{{route('lap.cetakberkas')}}"><i class="fa fa-circle"></i>Cetak Berkas Untuk Pemohon</a></li>
           <li><a href="{{route('lap.berkas')}}"><i class="fa fa-circle"></i>Lap. Bulanan Berkas</a></li>
           <li><a href="{{route('lap.berkasselesai')}}"><i class="fa fa-circle"></i>Lap. Berkas Selesai</a></li>
@@ -65,7 +66,7 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MENU UTAMA</li>
       <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Cek Berkas</a></li>
-      <li><a href="#"><i class="fa fa-share"></i>Tanah Bersertifikat</a></li>
+      <li><a href="{{route('sertifikatuser')}}"><i class="fa fa-share"></i>Tanah Bersertifikat</a></li>
       <li><a href="{{route('logout')}}"><i class="fa fa-close"></i> Logout</a></li>
     </ul>
     @endif
