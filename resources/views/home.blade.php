@@ -30,6 +30,9 @@
 
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Jalur Direction </label>
+                    <div class="col-sm-3">
+                      <a href="{{route('direction')}}" class="btn btn-sm btn-primary">Jalur Direction</a>
+                    </div>
                     {{-- <div class="col-sm-3">
                       <select id="berkas" class="form-control select2" style="width: 100%;" name="berkas_id">
                                 <option value="{{$s->id}}" selected>Lokasi Saya</option>
@@ -43,7 +46,6 @@
                             @endforeach
                       </select>
                     </div> --}}
-                      <a href="{{route('direction')}}" class="btn btn-sm btn-primary">Jalur Direction</a>
                   </div>
                 </div>
       </div>
