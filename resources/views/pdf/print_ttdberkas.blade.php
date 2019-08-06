@@ -15,7 +15,7 @@
 
 <body>
 
-<h3 class="auto-style1">BERKAS PEMOHON</h3>
+<h3 class="auto-style1">TANDA TERIMA BERKAS PEMOHON</h3>
 <p><b>BIODATA :</b></p>
 <table style="width: 100%">
 	<tr>

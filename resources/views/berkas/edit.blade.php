@@ -27,6 +27,14 @@
               <input type="text" class="form-control" name="nomor" readonly onkeypress="return hanyaAngka(event)" value="{{$d->nomor}}">
               </div>
             </div>
+
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Nomor HAK Pakai</label>
+              <div class="col-sm-10">
+              <input type="text" class="form-control" name="no_hak_pakai" required value="{{$d->no_hak_pakai}}">
+              </div>
+            </div>
+
             <div class="form-group">
                 <label class="col-sm-2 control-label">NIK Pemohon</label>
                 <div class="col-sm-10">
