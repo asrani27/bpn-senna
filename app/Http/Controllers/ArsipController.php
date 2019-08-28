@@ -34,16 +34,24 @@ class ArsipController extends Controller
 
     public function edit()
     {
-    	
+        $data = Arsip::find($id);
+        return view('arsip.edit',compact('data'));
     }
 
     public function update()
     {
-    	
+        $d = Arsip::find($req->idedit);
+        $d->fill($req->all());
+        $d->save();
+        Alert::Success('Senna', 'Berhasil DiUpdate');
+        return back();	
     }
 
     public function delete()
     {
-    	
+        $d = Arsip::find($id);
+        $d->delete();
+        Alert::Success('Senna', 'Berhasil Di hapus');
+        return back();
     }
 }

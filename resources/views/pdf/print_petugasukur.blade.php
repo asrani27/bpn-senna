@@ -4,7 +4,7 @@
 <head>
 <meta content="en-us" http-equiv="Content-Language" />
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<title>DINAS PENGENDALI PENDUDUK DAN KE</title>
+<title>DETUGAS UKUR</title>
 <style type="text/css">
 .auto-style1 {
 	text-align: center;

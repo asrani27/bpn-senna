@@ -4,7 +4,7 @@
 <head>
 <meta content="en-us" http-equiv="Content-Language" />
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<title>BERKAS PEMOHON</title>
+<title>TANDA TERIMA BERKAS</title>
 <style type="text/css">
 .auto-style1 {
 	text-align: center;
@@ -15,7 +15,7 @@
 
 <body>
 
-<h3 class="auto-style1">BERKAS PEMOHON</h3>
+<h3 class="auto-style1">TANDA TERIMA BERKAS</h3>
 <p><b>BIODATA :</b></p>
 <table style="width: 100%">
 	<tr>
