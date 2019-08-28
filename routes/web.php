@@ -39,6 +39,9 @@ Route::get('/arsip/add', 'ArsipController@add')->name('addArsip');
 Route::post('/arsip/edit', 'ArsipController@update')->name('editarsip');
 Route::get('/arsip/delete/{id}', 'ArsipController@delete');
 Route::post('/arsip/store', 'ArsipController@store')->name('saveArsip');
+Route::get('/arsip/edit/{id}', 'ArsipController@edit');
+Route::get('/arsip/delete/{id}', 'ArsipController@delete');
+Route::post('/arsip/update/{id}', 'ArsipController@update')->name('updateArsip');
 
 //Route User
 Route::get('/user', 'UserController@index')->name('user');
