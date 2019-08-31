@@ -30,9 +30,9 @@ class HomeController extends Controller
     public function index()
     {
         Mapper::map(-3.798144, 114.747211, ['zoom' => 14, 'marker' => false, 'gestureHandling' => 'greedy', 'scrollWheelZoom' => false]);
-        $berkas = Berkas::all();
+        $berkass = Berkas::all();
         $status = Status::all();
-        $map = $berkas->map(function($item)use($status){
+        $map = $berkass->map(function($item)use($status){
             if($item->status_id == null)
             {
                 $item->icon = $status->first()->icon;
@@ -63,8 +63,11 @@ class HomeController extends Controller
             ]
             );
         }
-        
-        return view('home',compact('berkas'));
+        $status = Status::all();
+        $berkass = Berkas::all();
+        $bk = $berkass->first();
+        $datastatus = Status::first();
+        return view('home',compact('bk','berkass','status','datastatus'));
     }
 
     public function cariberkas(Request $req)
@@ -104,7 +107,65 @@ class HomeController extends Controller
             );
         }
         
-        return view('home',compact('berkas'));
+        $status = Status::all();
+        $berkass = Berkas::all();
+        $bk = $berkas->first();
+        $datastatus = Status::first();
+        return view('home',compact('bk','status','berkass','datastatus'));
+    }
+
+    public function caristatus(Request $req)
+    {
+        //dd($req->all());
+        $berkas = Berkas::where('status_id', $req->status_id)->get();
+        if(count($berkas) == 0)
+        {
+            
+            Alert::error('Senna', 'Tidak Ada Data Pada Status Tersebut');
+            return redirect('/home');
+        }
+        else {
+            Mapper::map($berkas->first()->lat, $berkas->first()->long, ['zoom' => 14, 'marker' => false, 'gestureHandling' => 'greedy', 'scrollWheelZoom' => false]);
+            $status = Status::all();
+            $map = $berkas->map(function($item)use($status){
+                if($item->status_id == null)
+                {
+                    $item->icon = $status->first()->icon;
+                    $item->status = '-';
+                }
+                else
+                {
+                    $item->icon = $item->status->icon;
+                    $item->status = $item->status->nama_status;
+                }
+                return $item;
+            });
+    
+            foreach($map as $b)
+            {
+                Mapper::informationWindow($b->lat, $b->long, 
+                "Nomor : {$b->nomor} <br>
+                Nama : {$b->pemohon->nama} <br>
+                Luas : {$b->luas} <br>
+                Status : {$b->status} <br>
+                <img src='http://localhost:8000/storage/{$b->foto}' width='100px'>
+                ", 
+                ['icon' => $b->icon,
+                'open' => false, 
+                'maxWidth'=> 300, 
+                'markers' => 
+                    ['title' => 'Title', 'autoClose' => true]
+                ]
+                );
+            }
+        
+        $databerkas = Berkas::all();
+        $status = Status::all();
+        $berkass = $databerkas;
+        $bk = $berkas->first();
+        $datastatus = Status::find($req->status_id);
+        return view('home',compact('bk','status','berkass','datastatus'));
+        }
     }
 
     public function delete($id)

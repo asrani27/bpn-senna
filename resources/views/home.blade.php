@@ -16,14 +16,39 @@
                     <label class="col-sm-2 control-label">Cari Berkas</label>
                     <div class="col-sm-8">
                       <select id="berkas" class="form-control select2" style="width: 100%;" name="berkas_id">
-                            @foreach ($berkas as $s)
+                            @foreach ($berkass as $s)
+                              @if($s->id == $bk->id)
+                                <option value="{{$s->id}}" selected>{{$s->nomor}} / {{$s->pemohon->nama}}</option>
+                              @else
                                 <option value="{{$s->id}}">{{$s->nomor}} / {{$s->pemohon->nama}}</option>
+                              @endif
                             @endforeach
                       </select>
                     </div>
                     <div class="col-sm-2">
                       <button class="btn btn-sm btn-primary" type=submit>Search</button>
                       <a href="{{route('home')}}" class="btn btn-sm btn-primary">Semua</a>
+                    </div>
+                  </div>
+                </form>
+
+                <form method="POST" action="{{route('caristatus')}}">  
+                  {{ csrf_field() }}
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Berdasarkan Status</label>
+                    <div class="col-sm-8">
+                      <select id="berkas" class="form-control select2" style="width: 100%;" name="status_id">
+                            @foreach ($status as $s)
+                              @if($s->id == $datastatus->id)
+                                <option value="{{$s->id}}" selected>{{$s->nama_status}}</option>
+                              @else  
+                                <option value="{{$s->id}}">{{$s->nama_status}}</option>
+                              @endif
+                            @endforeach
+                      </select>
+                    </div>
+                    <div class="col-sm-2">
+                      <button class="btn btn-sm btn-primary" type=submit>Search</button>
                     </div>
                   </div>
                 </form>

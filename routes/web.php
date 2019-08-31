@@ -30,7 +30,8 @@ Route::get('logout', function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/cariberkas', 'HomeController@cariberkas')->name('cariberkas');
+Route::post('/home', 'HomeController@cariberkas')->name('cariberkas');
+Route::post('/homee', 'HomeController@caristatus')->name('caristatus');
 Route::get('/direction', 'HomeController@direction')->name('direction');
 
 //Route Arsip
